@@ -18,6 +18,6 @@ public class Trainer extends Person  {
   // toString method for Trainer class
   public String toString() {
 
-    return super.toString()+"/nSpeciality: "+speciality;
+    return super.toString()+" Speciality: "+speciality;
   }
 }

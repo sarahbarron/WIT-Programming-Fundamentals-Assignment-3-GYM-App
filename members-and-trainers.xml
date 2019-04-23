@@ -1,13 +1,13 @@
 <object-stream>
   <list>
     <Member>
-      <name>sarah</name>
+      <name></name>
       <email>sarah</email>
-      <address>sarha</address>
+      <address>julie</address>
       <gender>f</gender>
       <height>3.0</height>
-      <startWeight>87.0</startWeight>
-      <chosenPackage>wit</chosenPackage>
+      <startWeight>99.0</startWeight>
+      <chosenPackage>Package 1</chosenPackage>
       <assessmentCollection/>
     </Member>
   </list>

@@ -73,6 +73,6 @@ public class Person {
 
     // toString method for Person class
     public String toString() {
-        return "Person: "+name+"/nAddress: "+address+"/nEmail: "+email+"/nGender: "+gender;
+        return "Name: "+name+ ", Address: "+address+", Email: "+email+", Gender: "+gender +" , ";
     }
 }

@@ -112,7 +112,7 @@ public class Member extends Person {
     // toString method for Member class
     public String toString() {
 
-        return super.toString()+"/nHeight: "+height+"/nStart Weight: "+startWeight+"/nChosen Package: "+chosenPackage;
+        return super.toString()+"Height: "+height+" , Start Weight: "+startWeight+" , Chosen Package: "+chosenPackage;
     }
 }
 
