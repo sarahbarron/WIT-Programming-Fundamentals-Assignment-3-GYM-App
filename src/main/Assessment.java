@@ -5,13 +5,11 @@ public class Assessment {
   private String comment;
   private Trainer trainer;
 
-
-  public Assessment(float weight, float thigh, float waist, String comment, Trainer trainer) {
+  public Assessment(float weight, float thigh, float waist, String comment) {
     setWeight(weight);
     setThigh(thigh);
     setWaist(waist);
     setComment(comment);
-    setTrainer(trainer);
   }
 
   public float getWeight() {

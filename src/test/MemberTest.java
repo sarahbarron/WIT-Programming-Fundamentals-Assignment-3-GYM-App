@@ -3,17 +3,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.SortedSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Tests for Member class")
 public class MemberTest {
     Member member1;
+    Assessment assessment1;
+    Assessment assessment2;
+    Assessment assessment3;
 
     @BeforeEach
     public void setUp() {
         member1 = new Member("email1", "name1", "address1", "F",
                 1.5f, 100.0f, "Package 1");
     }
+
     @Nested
     @DisplayName("setStartingWeight method test")
     class Weight {
@@ -102,6 +108,7 @@ public class MemberTest {
                     "31 characters is not allowed");
         }
     }
+
     @Nested
     @DisplayName("setGender method test")
     class Gender {
@@ -248,5 +255,78 @@ public class MemberTest {
             }
         }
     }
+
+    @Nested
+    @DisplayName("sortedAssessmentDates method tests")
+    class SortedDates {
+
+
+        @Nested
+        @DisplayName("Given their are some assessments for the member")
+        class Some {
+            @BeforeEach
+            public void setUp() {
+                member1.getAssessments().put("18/01/01", assessment1);
+                member1.getAssessments().put("18/01/02", assessment2);
+                member1.getAssessments().put("18/01/03", assessment3);
+            }
+
+            @DisplayName("Should return a sorted date set")
+            @Test
+            public void sorted() {
+                SortedSet<String> result = member1.sortedAssessmentDates();
+                assertTrue(result.last() == "18/01/03", "Last date not correct");
+                assertTrue(result.first() == "18/01/01", "Last date not correct");
+            }
+        }
+        @Nested
+        @DisplayName("Given their are no assessments for the member")
+        class None {
+
+            @DisplayName("Should return an empty set")
+            @Test
+            public void empty() {
+                SortedSet<String> result = member1.sortedAssessmentDates();
+                assertTrue(result.size() == 0, "Set not empty");
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("latestAssessment method tests")
+    class LatestAssessment {
+
+        @Nested
+        @DisplayName("Given their are some assessments for the member")
+        class Some {
+            @BeforeEach
+            public void setUp() {
+                assessment3 = new Assessment(0.0f,0.0f,0.0f,"comment3");
+                member1.getAssessments().put("18/01/01", assessment1);
+                member1.getAssessments().put("18/01/02", assessment2);
+                member1.getAssessments().put("18/01/03", assessment3);
+            }
+
+            @DisplayName("Should return the latest one")
+            @Test
+            public void latest() {
+                Assessment result = member1.latestAssessment();
+                assertTrue(result.getComment() == "comment3", "Incorrect assessment returned");
+            }
+        }
+        @Nested
+        @DisplayName("Given their are no assessments for the member")
+        class None {
+
+            @DisplayName("Should return null")
+            @Test
+            public void empty() {
+                Assessment result = member1.latestAssessment();
+                assertNull (result, "Did not return null");
+            }
+        }
+    }
 }
+
+
 

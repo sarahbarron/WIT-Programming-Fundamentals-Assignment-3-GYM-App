@@ -30,7 +30,7 @@ public class Person {
 
     //given
     public void setGender(String gender) {
-        if(gender.equals("M") || gender.equals("F"))
+        if(gender.equalsIgnoreCase("M") || gender.equalsIgnoreCase("F"))
         {
             this.gender = gender;
         }

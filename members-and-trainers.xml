@@ -1,0 +1,15 @@
+<object-stream>
+  <list>
+    <Member>
+      <name>sarah</name>
+      <email>sarah</email>
+      <address>sarha</address>
+      <gender>f</gender>
+      <height>3.0</height>
+      <startWeight>87.0</startWeight>
+      <chosenPackage>wit</chosenPackage>
+      <assessmentCollection/>
+    </Member>
+  </list>
+  <list/>
+</object-stream>

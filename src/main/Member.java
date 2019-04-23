@@ -2,6 +2,9 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 
 // THIS CODE IS INCOMPLETE
 //given
@@ -15,16 +18,13 @@ public class Member extends Person {
 
     private HashMap<String, Assessment> assessmentCollection;
 
-    //given
+    // height = metres, weight = kgs
     public Member(String email, String name, String address,
                   String gender, float height, float startWeight, String chosenPackage) {
-        //given
+
         super(email, name, address, gender);
-        //given
         setHeight(height);
-        //given
         setStartWeight(startWeight);
-        //given
         setChosenPackage(chosenPackage);
 //        create a Collection to store Members Assessments
         assessmentCollection = new HashMap<String , Assessment>();
@@ -85,16 +85,17 @@ public class Member extends Person {
 
     public Assessment latestAssessment(){
 
-      SortedSet assessments = sortedAssessmentDates();
-      String lastDate = assessments.getlast();
+      SortedSet sortedSet = sortedAssessmentDates();
+      String lastDate = (String)sortedSet.last();
       Assessment lastAssessment = assessmentCollection.get(lastDate);
       return lastAssessment;
    }
 
    public SortedSet sortedAssessmentDates(){
-          SortedSet sortedAssessmentDates = new SortedSet(assessmentCollection);
-          sortedAssessmentDates.getSortedSet();
-          return sortedAssessmentDates;
+
+        SortedSet<String> sortedSet = new TreeSet();
+        sortedSet.addAll(assessmentCollection.keySet());
+        return sortedSet;
     }
 
 //    public abstract void chosenPackage(String chosenPackage)
@@ -102,6 +103,10 @@ public class Member extends Person {
 //          // TODO the concrete implementation of this method will be completed in Member subclasses (pg3)
 //    }
 
+
+    public HashMap<String, Assessment> getAssessments() {
+        return assessmentCollection;
+    }
 
 
     // toString method for Member class

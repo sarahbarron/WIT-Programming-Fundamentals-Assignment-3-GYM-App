@@ -37,33 +37,37 @@ public class GymUtility {
   }
 
 //  Returns a boolean to indicate if the member has and ideal body weight based on the Devine Formula
-
   public static boolean isIdealBodyWeight(Member member, Assessment assessment) {
+
     String gender = member.getGender();
+    // weight of the member in kgs.
     float weight = assessment.getWeight();
+    // heigth of the member in metres
     float height = member.getHeight();
-    float heightAboveFiveFoot;
-    int inchesAboveFiveFoot;
+
+    // convert metres to inches and round it to the nearest int
+    double heightInches =(height * 39.370);
+    //five foot is equal to 60 inches less a boundry or .2ft(2.4 inches)
+    double fiveFoot = 60;
+    double inchesAboveFiveFoot;
     double weightForEachInchOverFiveFoot;
     double idealWeight;
 
-//    if the height is greater than 5 ft
-    if (height > 5) {
 
-      heightAboveFiveFoot = height - 5;
-      inchesAboveFiveFoot = (int) (heightAboveFiveFoot / 0.0254);
+//    if the height is greater than 5 ft (with a .2ft boundry (2.4inches)
+    if (heightInches >= fiveFoot - 2.4) {
+
+      inchesAboveFiveFoot = heightInches - fiveFoot;
       weightForEachInchOverFiveFoot = inchesAboveFiveFoot * 2.3;
 
 //   if the member is male an ideal body weight is 50kg plus 2.3kg for every inch over 5ft
 
       if (gender.equalsIgnoreCase("m")) {
         idealWeight = 50 + weightForEachInchOverFiveFoot;
-
       }
       // otherwise the member is female/unspecified allow an ideal body weight of 45.5kg plus 2.3kg for every inch over 5ft
       else {
         idealWeight = 45.5 + weightForEachInchOverFiveFoot;
-
       }
 //   if the members weight is 2kg either side of the ideal weight return true otherwise return false
       if (weight >= idealWeight - 2 && weight <= idealWeight + 2) {
@@ -71,8 +75,6 @@ public class GymUtility {
       } else {
         return false;
       }
-
-
     }
 
 //    If the member is 5ft or less return true if male is 50kg or less or female is 45.5kg or less otherwise its false
