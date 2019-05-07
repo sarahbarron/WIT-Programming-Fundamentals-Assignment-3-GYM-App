@@ -1,3 +1,9 @@
+/*
+A Utility class with static reusable methods for:
+- Calculating a persons BMI rate
+- Calculating a persons BMI category
+- Calculating if a person has an ideal body weight.
+*/
 public class GymUtility {
 
   /*  Returns the BMI for the member based on the calculation
@@ -7,6 +13,7 @@ public class GymUtility {
     float height = member.getHeight();
     double squareOfHeight = Math.pow(height, 2);
     double bmi = weight / squareOfHeight;
+    bmi = (int) (bmi * 100) / 100.0;
     return bmi;
   }
 
@@ -18,7 +25,7 @@ public class GymUtility {
      BMI Between 30(inclusive) and 35(exclusive) is "MODERATELY OBESE"
      BMI greater than 35(inclusive) is "SEVERELY OBESE"
    */
-  public static String determineBMICategory(double bmiValue) {
+  public static String determineBMICategory(float bmiValue) {
     if (bmiValue < 16) {
       return "SEVERELY UNDERWEIGHT";
     } else if (bmiValue >= 16 && bmiValue < 18.5) {
@@ -36,7 +43,7 @@ public class GymUtility {
     }
   }
 
-//  Returns a boolean to indicate if the member has and ideal body weight based on the Devine Formula
+//  Returns a boolean to indicate if the member has an ideal body weight based on the Devine Formula
   public static boolean isIdealBodyWeight(Member member, Assessment assessment) {
 
     String gender = member.getGender();
@@ -47,7 +54,7 @@ public class GymUtility {
 
     // convert metres to inches and round it to the nearest int
     double heightInches =(height * 39.370);
-    //five foot is equal to 60 inches less a boundry or .2ft(2.4 inches)
+    //five foot is equal to 60 inches less a boundry of .2ft(2.4 inches)
     double fiveFoot = 60;
     double inchesAboveFiveFoot;
     double weightForEachInchOverFiveFoot;
@@ -56,12 +63,10 @@ public class GymUtility {
 
 //    if the height is greater than 5 ft (with a .2ft boundry (2.4inches)
     if (heightInches >= fiveFoot - 2.4) {
-
       inchesAboveFiveFoot = heightInches - fiveFoot;
       weightForEachInchOverFiveFoot = inchesAboveFiveFoot * 2.3;
 
 //   if the member is male an ideal body weight is 50kg plus 2.3kg for every inch over 5ft
-
       if (gender.equalsIgnoreCase("m")) {
         idealWeight = 50 + weightForEachInchOverFiveFoot;
       }
@@ -79,7 +84,6 @@ public class GymUtility {
 
 //    If the member is 5ft or less return true if male is 50kg or less or female is 45.5kg or less otherwise its false
     else {
-
       if (gender.equalsIgnoreCase("m")) {
         if (weight <= 50 && weight >= 48) {
           return true;
@@ -87,9 +91,7 @@ public class GymUtility {
       } else if (weight <= 45.5 && weight >= 43.5) {
         return true;
       }
-
       return false;
-
     }
   }
 }

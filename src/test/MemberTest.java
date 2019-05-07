@@ -3,6 +3,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.SortedSet;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,9 +15,28 @@ public class MemberTest {
     Assessment assessment2;
     Assessment assessment3;
 
+    //    Due to the Member class being abstract we need to use a mock member.
+    private class MockMember extends Member {
+
+        public MockMember() {
+        }
+
+        public MockMember(String email, String name, String address,
+                          String gender, float height, float startWeight, String chosenPackage) {
+
+            super(email, name, address, gender, height, startWeight, chosenPackage);
+            HashMap<String, Assessment> assessmentCollection = new HashMap<String, Assessment>();
+
+        }
+
+        public void chosenPackage(String chosenPackage) {
+
+        }
+    }
+
     @BeforeEach
     public void setUp() {
-        member1 = new Member("email1", "name1", "address1", "F",
+        member1 = new MockMember("email1", "name1", "address1", "F",
                 1.5f, 100.0f, "Package 1");
     }
 
@@ -146,12 +166,12 @@ public class MemberTest {
             @DisplayName("When the value is outside the boundary")
             @Test
             public void heightOutside() {
-                member1 = new Member("email1", "name1", "address1", "F",
+                member1 = new MockMember("email1", "name1", "address1", "F",
                         0.9f, 100.0f, "Package 1");
                 assertNotEquals(0.9f,
                         member1.getHeight(),
                         "0.9 should not be allowed");
-                member1 = new Member("email1", "name1", "address1", "F",
+                member1 = new MockMember("email1", "name1", "address1", "F",
                         3.1f, 100.0f, "Package 1");
                 assertNotEquals(3.1f,
                         member1.getHeight(),
@@ -162,12 +182,12 @@ public class MemberTest {
             @DisplayName("When the value is inside the boundary")
             @Test
             public void heightInside() {
-                member1 = new Member("email1", "name1", "address1", "F",
+                member1 = new MockMember("email1", "name1", "address1", "F",
                         1.0f, 100.0f, "Package 1");
                 assertEquals(1.0f,
                         member1.getHeight(),
                         "1.0 is allowed");
-                member1 = new Member("email1", "name1", "address1", "F",
+                member1 = new MockMember("email1", "name1", "address1", "F",
                         3.0f, 100.0f, "Package 1");
                 assertEquals(3.0f,
                         member1.getHeight(),
@@ -181,12 +201,12 @@ public class MemberTest {
             @DisplayName("When the value is outside the boundary")
             @Test
             public void weightOutside() {
-                member1 = new Member("email1", "name1", "address1", "F",
+                member1 = new MockMember("email1", "name1", "address1", "F",
                         2.0f, 34.9f, "Package 1");
                 assertNotEquals(34.9f,
                         member1.getStartWeight(),
                         "34.9 should not be allowed");
-                member1 = new Member("email1", "name1", "address1", "F",
+                member1 = new MockMember("email1", "name1", "address1", "F",
                         1.1f, 250.1f, "Package 1");
                 assertNotEquals(250.1f,
                         member1.getStartWeight(),
@@ -196,12 +216,12 @@ public class MemberTest {
             @DisplayName("When the value is inside the boundary")
             @Test
             public void weightInside() {
-                member1 = new Member("email1", "name1", "address1", "F",
+                member1 = new MockMember("email1", "name1", "address1", "F",
                         1.0f, 35.0f, "Package 1");
                 assertEquals(35.0f,
                         member1.getStartWeight(),
                         "35.0 is allowed");
-                member1 = new Member("email1", "name1", "address1", "F",
+                member1 = new MockMember("email1", "name1", "address1", "F",
                         3.0f, 250.0f, "Package 1");
                 assertEquals(250.0f,
                         member1.getStartWeight(),
@@ -215,7 +235,7 @@ public class MemberTest {
             @DisplayName("When the value is too long")
             @Test
             public void weightOutside() {
-                member1 = new Member("email1",
+                member1 = new MockMember("email1",
                         "1234567890123456789012345678901",
                         "address1", "F",
                         2.0f, 34.9f, "Package 1");
@@ -232,12 +252,12 @@ public class MemberTest {
             @DisplayName("When the value is F or M")
             @Test
             public void orFM() {
-                member1 = new Member("email1", "name1", "address1", "F",
+                member1 = new MockMember("email1", "name1", "address1", "F",
                         2.0f, 34.9f, "Package 1");
                 assertEquals("F",
                         member1.getGender(),
                         "F allowed");
-                member1 = new Member("email1", "name1", "address1", "M",
+                member1 = new MockMember("email1", "name1", "address1", "M",
                         1.1f, 250.1f, "Package 1");
                 assertEquals("M",
                         member1.getGender(),
@@ -247,7 +267,7 @@ public class MemberTest {
             @DisplayName("When the value is neither F nor M")
             @Test
             public void notFM() {
-                member1 = new Member("email1", "name1", "address1", "P",
+                member1 = new MockMember("email1", "name1", "address1", "P",
                         2.0f, 34.9f, "Package 1");
                 assertEquals("Unspecified",
                         member1.getGender(),

@@ -15,11 +15,15 @@ public class StudentMember extends Member  {
     return studentId;
   }
 
+  public void setStudentId(int studentId){
+    this.studentId = studentId;
+  }
 
   public String getCollegeName() {
     return collegeName;
   }
 
+  @Override
   public void chosenPackage(String packageChoice)
   {
     String collegeName = getCollegeName();
@@ -35,6 +39,6 @@ public class StudentMember extends Member  {
   // toString method for Student Member class
   public String toString() {
 
-    return super.toString()+"/nStudent Id: "+studentId+"/nCollege Name: "+collegeName;
+    return super.toString()+", College Name: "+collegeName+" ,Student Id: "+studentId;
   }
 }

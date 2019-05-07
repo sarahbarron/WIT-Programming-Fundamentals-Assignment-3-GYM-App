@@ -71,6 +71,10 @@ public class Person {
         setGender(gender);
     }
 
+    public Person(){
+
+    }
+
     // toString method for Person class
     public String toString() {
         return "Name: "+name+ ", Address: "+address+", Email: "+email+", Gender: "+gender +" , ";

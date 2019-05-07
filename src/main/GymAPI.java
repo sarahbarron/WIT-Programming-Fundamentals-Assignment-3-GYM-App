@@ -27,29 +27,28 @@ public class GymAPI {
     return members;
   }
 
+  // Returns an list of all trainers
   public ArrayList<Trainer> getTrainers() {
     return trainers;
   }
 
-  // Adds a member
+  // Adds a member to the array list
   public void addMember(Member member) {
     members.add(member);
   }
 
-  // Adds a trainer
+  // Adds a trainer to the array list
   public void addTrainer(Trainer trainer) {
     trainers.add(trainer);
   }
 
-  // Returns the number of members
+  // Returns the number of members in the array list
   public int numberOfMembers() {
-
     return members.size();
   }
 
-  // Return the number of trainers
+  // Return the number of trainers in the array list
   public int numberOfTrainerss() {
-
     return trainers.size();
   }
 
@@ -63,7 +62,6 @@ public class GymAPI {
 
   // Returns a boolean indicating if the index passed as a parameter is a valid index for members array list
   public boolean isValidTrainerIndex(int index) {
-
     if (index < numberOfTrainerss()) {
       return true;
     }
@@ -90,6 +88,9 @@ public class GymAPI {
 
     for (Member member : members) {
       String memberName = member.getName();
+//    Convert to lowercase as the .contains and .equals methods are case sensitive
+      memberName = memberName.toLowerCase();
+      nameEntered = nameEntered.toLowerCase();
       // check for an exact match of the name being search in the list of members
       if (memberName.equals(nameEntered)) {
         matchedlist.add(memberName);
@@ -113,13 +114,17 @@ public class GymAPI {
     return null;
   }
 
-
+  /*  Returns a list of trainers names that partially or entirely matches the entered name. An empty array is returned
+    when there are no matches
+ */
   public ArrayList<String> searchTrainersByName(String nameEntered) {
     trainers = getTrainers();
     ArrayList<String> matchedlist = new ArrayList<>();
 
     for (Trainer trainer : trainers) {
-      String trainerName = trainer.getName();
+//      convert to lower case names as the .contains and .equals method is case sensitive
+      String trainerName = trainer.getName().toLowerCase();
+      nameEntered = nameEntered.toLowerCase();
       // check for an exact match of the name being search in the list of members
       if (trainerName.equals(nameEntered)) {
         matchedlist.add(trainerName);
@@ -138,7 +143,7 @@ public class GymAPI {
   }
 
   /* Returns a list containing all the members details in the gym whose latest assessment weight is an ideal
-  weight (based on the devine formula). Returns an empty list if none are found.
+  weight (based on the Devine Formula). Returns an empty list if none are found.
    */
   public ArrayList<Member> listMembersWithIdealWeight() {
 
@@ -154,46 +159,59 @@ public class GymAPI {
     return listOfMembersWithIdealWeight;
   }
 
-/* Returns a list of all members details in the gym whose BMI category (based on the latest assessment weight) partially
-or entirely matches the entered category. Returns an empty list if none found */
-
+  /* Returns a list of all members details in the gym whose BMI category (based on the latest assessment weight) partially
+  or entirely matches the entered category. Returns an empty list if none found */
   public ArrayList<Member> listMembersBySpecificBMICategory(String category) {
 
     ArrayList<Member> listOfMembersInSpecifiedBMICategory = new ArrayList<>();
     category = category.trim().toUpperCase();
     Assessment latestAssessment;
-    double bmi;
+    float bmi;
     String memberBmiCategory;
     String severelyUnderWeight = "SEVERELY UNDERWEIGHT";
     String underweight = "UNDERWEIGHT";
     String normal = "NORMAL";
-    String overweight = "OVER WEIGHT";
+    String overweight = "OVERWEIGHT";
     String moderatelyObese = "MODERATELY OBESE";
     String severlyObese = "SEVERELY OBESE";
 
+    /*    If the inputted string is an exact match to one of the BMI categories iterate through the list of members.
+    get each members latest assessment, calculate their BMi and with their BMI rate calculate the BMI category they are
+    in. If the member is in the category inputted by user add the member to an array. Return this array after all
+    members categories have been calculated.
+  */
     if (category.equals(severelyUnderWeight) || category.equals(underweight) || category.equals(normal)
         || category.equals(overweight) || category.equals(moderatelyObese) || category.equals(severlyObese)) {
       for (Member member : members) {
         latestAssessment = member.latestAssessment();
-        bmi = GymUtility.calculateBMI(member, latestAssessment);
+        bmi = (float) GymUtility.calculateBMI(member, latestAssessment);
         memberBmiCategory = GymUtility.determineBMICategory(bmi);
         if (memberBmiCategory.equals(category)) {
           listOfMembersInSpecifiedBMICategory.add(member);
         }
       }
-    } else if (severelyUnderWeight.contains(category) || underweight.contains(category) || normal.contains(category)
+    }
+    /* otherwise if the inputted string only partially matches a bmi category, get each members assessment, calculate
+    their bmi using the latest weight. Calculate the bmi category using the bmi rate. If the members category partially
+    matches the input from the user add the member to an array
+    */
+    else if (severelyUnderWeight.contains(category) || underweight.contains(category) || normal.contains(category)
         || overweight.contains(category) || moderatelyObese.contains("category") || severlyObese.contains(category)) {
       for (Member member : members) {
         latestAssessment = member.latestAssessment();
-        bmi = GymUtility.calculateBMI(member, latestAssessment);
+        bmi = (float) GymUtility.calculateBMI(member, latestAssessment);
         memberBmiCategory = GymUtility.determineBMICategory(bmi);
         if (memberBmiCategory.contains(category)) {
           listOfMembersInSpecifiedBMICategory.add(member);
         }
       }
-    } else {
+    }
+//    Otherwise print as statement to say there is no such category
+    else {
       System.out.println("no such category");
     }
+
+//    Return the array list of all members who matched the inputted category from the user.
     return listOfMembersInSpecifiedBMICategory;
   }
 
@@ -207,7 +225,7 @@ or entirely matches the entered category. Returns an empty list if none found */
       int weightLbs = 0;
       double heightMetres = 0;
       int heightInches = 0;
-      String membersDetails = "Member Details Imperial and Metric: ";
+      String membersDetails = "Member Details Imperial and Metric: \n";
       Assessment latestAssessment;
       for (Member member : members) {
         memberName = member.getName();
@@ -247,7 +265,7 @@ or entirely matches the entered category. Returns an empty list if none found */
     XStream xstream = new XStream(new DomDriver());
 
     // ------------------ PREVENT SECURITY WARNINGS---------------------------
-    Class<?>[] classes = new Class[]{Member.class, Trainer.class};
+    Class<?>[] classes = new Class[]{Member.class, StudentMember.class, PremiumMember.class, Trainer.class, Assessment.class};
     XStream.setupDefaultSecurity(xstream);
     xstream.allowTypes(classes);
     // -----------------------------------------------------------------------

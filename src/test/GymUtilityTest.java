@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Tests for GymUtility class")
@@ -12,9 +14,28 @@ public class GymUtilityTest {
     Member member1;
     Assessment assessment1;
 
+    //    Due to the Member class being abstract we need to use a mock member.
+    private class MockMember extends Member {
+
+        public MockMember() {
+        }
+
+        public MockMember(String email, String name, String address,
+                          String gender, float height, float startWeight, String chosenPackage) {
+
+            super(email, name, address, gender, height, startWeight, chosenPackage);
+            HashMap<String, Assessment> assessmentCollection = new HashMap<String, Assessment>();
+
+        }
+
+        public void chosenPackage(String chosenPackage) {
+
+        }
+    }
+
     @BeforeEach
     public void setUp() {
-        member1 = new Member("email1", "name1", "address1", "F",
+        member1 = new MockMember("email1", "name1", "address1", "F",
                 1.5f, 100.0f, "Package 1");
         assessment1 = new Assessment(12.0f, 1.0f, 1.0f, "comment");
     }

@@ -1,118 +1,136 @@
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 
-// THIS CODE IS INCOMPLETE
-//given
-public class Member extends Person {
-    //given
-    private float height;
-    //given
-    private float startWeight;
-    //given
-    private String chosenPackage;
+/*
+An abstract Member class that extends the Person class
+Stores a member. Each member has a height, starting weight, a gym package and assessments
+ */
+public abstract class Member extends Person {
 
-    private HashMap<String, Assessment> assessmentCollection;
+  private float height;
+  private float startWeight;
+  private String chosenPackage;
+  private HashMap<String, Assessment> assessmentCollection;
 
-    // height = metres, weight = kgs
-    public Member(String email, String name, String address,
-                  String gender, float height, float startWeight, String chosenPackage) {
+  //    constructor method
+  public Member() {
 
-        super(email, name, address, gender);
-        setHeight(height);
-        setStartWeight(startWeight);
-        setChosenPackage(chosenPackage);
+  }
+
+  // Constructor method with email name, address, gender, height (metres), start weight (kgs) and chosen package
+  public Member(String email, String name, String address,
+                String gender, float height, float startWeight, String chosenPackage) {
+
+    super(email, name, address, gender);
+    setHeight(height);
+    setStartWeight(startWeight);
+    setChosenPackage(chosenPackage);
 //        create a Collection to store Members Assessments
-        assessmentCollection = new HashMap<String , Assessment>();
+    assessmentCollection = new HashMap<String, Assessment>();
+  }
+
+  //    Get the height of the member
+  public float getHeight() {
+    return height;
+  }
+
+  // set the height of the member, if they enter between 1 and 3 store the input otherwise set the height to 0
+  public void setHeight(float height) {
+    if (height >= 1 && height <= 3.0) {
+      this.height = height;
+    } else {
+      this.height = 0;
     }
+  }
 
-    //given
-    public float getHeight() {
-        return height;
+  // get the members starting weight
+  public float getStartWeight() {
+    return startWeight;
+  }
+
+  /* set the members starting weight, if the user input was between 35 and 250 store the user input otherwise
+  store 0 as the starting weight
+*/
+  public void setStartWeight(float startWeight) {
+    if (startWeight >= 35 && startWeight <= 250) {
+      this.startWeight = startWeight;
+    } else {
+      this.startWeight = 0;
     }
-
-    //given
-    public void setHeight(float height) {
-        if (height >= 1 && height <= 3.0) {
-            this.height = height;
-        } else {
-            this.height = 0;
-        }
-    }
-
-    //given
-    public float getStartWeight() {
-        return startWeight;
-    }
-
-    //given
-    public void setStartWeight(float startWeight) {
-        if (startWeight >= 35 && startWeight <= 250) {
-            this.startWeight = startWeight;
-        } else {
-            this.startWeight = 0;
-        }
-    }
+  }
 
 
-    //given
-    public String getChosenPackage() {
-        return chosenPackage;
-    }
+  // get the chosen package
+  public String getChosenPackage() {
+    return chosenPackage;
+  }
 
-    //given
-    public void setChosenPackage(String chosenPackage) {
-        this.chosenPackage = chosenPackage;
-    }
+  // set the chosen package
+  public void setChosenPackage(String chosenPackage) {
+    this.chosenPackage = chosenPackage;
+  }
 
-//    add an assessment to the members collection of assessments
-    public void addAssessment(Assessment assessment)
-    {
-        Date dateObject = new Date();
-        String date = formatDate(dateObject);
-        assessmentCollection.put(date, assessment);
-    }
+  /*   add an assessment to the members collection of assessments, with
+  the date as the key and the assessment as the value
+    */
+  public void addAssessment(String date, Assessment assessment) {
+    assessmentCollection.put(date, assessment);
+  }
 
-//  format the date to a string YY/MM/DD eg 18/05/04
-    public String formatDate(Date dateObject) {
-        Format formatDate = new SimpleDateFormat("yy/mm/dd");
-        return formatDate.format(dateObject);
-    }
+  /*    get the latest assessment by getting a sorted set of assessment dates,
+  use the last date in the set as the key to finding the latest assessment and return the assessment*/
+  public Assessment latestAssessment() {
 
-    public Assessment latestAssessment(){
-
-      SortedSet sortedSet = sortedAssessmentDates();
-      String lastDate = (String)sortedSet.last();
-      Assessment lastAssessment = assessmentCollection.get(lastDate);
+    SortedSet sortedSet = sortedAssessmentDates();
+    Assessment lastAssessment = new Assessment(startWeight, -1, -1, "");
+    if (sortedSet.size() > 0) {
+      String lastDate = (String) sortedSet.last();
+      lastAssessment = assessmentCollection.get(lastDate);
       return lastAssessment;
-   }
-
-   public SortedSet sortedAssessmentDates(){
-
-        SortedSet<String> sortedSet = new TreeSet();
-        sortedSet.addAll(assessmentCollection.keySet());
-        return sortedSet;
     }
 
-//    public abstract void chosenPackage(String chosenPackage)
-//    {
-//          // TODO the concrete implementation of this method will be completed in Member subclasses (pg3)
-//    }
+    return lastAssessment;
+  }
 
-
-    public HashMap<String, Assessment> getAssessments() {
-        return assessmentCollection;
+  /*   Return the first assessment by getting a sorted set of assessment dates. Use the first date in the set as the key
+      to finding the first assessment. return this first assessment
+    */
+  public Assessment firstAssessment() {
+    SortedSet sortedSet = sortedAssessmentDates();
+    Assessment firstAssessment = new Assessment(startWeight, -1, -1, "");
+    if (sortedSet.size() > 0) {
+      String firstDate = (String) sortedSet.first();
+      firstAssessment = assessmentCollection.get(firstDate);
     }
+    return firstAssessment;
+  }
 
+  /*
+  A method to sort assessment dates, by creating a SortedSet and assigning a TreeSet to it,
+  add all keys (dates) from the HashMap assessmentCollection to the SortedSet
+  this will sort them automatically, return the SortedSet
+   */
+  public SortedSet sortedAssessmentDates() {
+    SortedSet<String> sortedSet = new TreeSet();
+    sortedSet.addAll(assessmentCollection.keySet());
+    return sortedSet;
+  }
 
-    // toString method for Member class
-    public String toString() {
+  // Getter method to return the HashMap of assessments
+  public HashMap<String, Assessment> getAssessments() {
+    return assessmentCollection;
+  }
 
-        return super.toString()+"Height: "+height+" , Start Weight: "+startWeight+" , Chosen Package: "+chosenPackage;
-    }
+  //    abstract method for chosen Package
+  public abstract void chosenPackage(String chosenPackage);
+
+  // toString method for Member class
+  public String toString() {
+
+    return super.toString() + "Height: " + height + " , Start Weight: " + startWeight
+        + " , Chosen Package: " + chosenPackage;
+  }
 }
 

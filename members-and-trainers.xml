@@ -1,15 +1,122 @@
 <object-stream>
   <list>
-    <Member>
-      <name></name>
-      <email>sarah</email>
-      <address>julie</address>
+    <StudentMember>
+      <name>Lisa</name>
+      <email>lisa@simpson.com</email>
+      <address>simpson row</address>
       <gender>f</gender>
-      <height>3.0</height>
+      <height>1.4</height>
+      <startWeight>88.0</startWeight>
+      <chosenPackage>wit</chosenPackage>
+      <assessmentCollection>
+        <entry>
+          <string>19/05/19</string>
+          <Assessment>
+            <weight>88.0</weight>
+            <thigh>23.0</thigh>
+            <waist>23.0</waist>
+            <comment>Keep it up</comment>
+            <trainer>
+              <name>Marge</name>
+              <email>marge@simpson.com</email>
+              <address>Simpson Road</address>
+              <gender>f</gender>
+              <speciality>Gymnastics</speciality>
+            </trainer>
+          </Assessment>
+        </entry>
+      </assessmentCollection>
+      <studentId>1234</studentId>
+      <collegeName>WIT</collegeName>
+    </StudentMember>
+    <PremiumMember>
+      <name>Homer</name>
+      <email>homer@simpson.com</email>
+      <address>Simpson Row</address>
+      <gender>m</gender>
+      <height>1.88</height>
       <startWeight>99.0</startWeight>
-      <chosenPackage>Package 1</chosenPackage>
+      <chosenPackage>Package 3</chosenPackage>
+      <assessmentCollection>
+        <entry>
+          <string>19/05/19</string>
+          <Assessment>
+            <weight>98.0</weight>
+            <thigh>44.0</thigh>
+            <waist>33.0</waist>
+            <comment>Great</comment>
+            <trainer reference="../../../../../StudentMember/assessmentCollection/entry/Assessment/trainer"/>
+          </Assessment>
+        </entry>
+        <entry>
+          <string>12/05/19</string>
+          <Assessment>
+            <weight>99.0</weight>
+            <thigh>22.0</thigh>
+            <waist>22.0</waist>
+            <comment>ok</comment>
+            <trainer reference="../../../../../StudentMember/assessmentCollection/entry/Assessment/trainer"/>
+          </Assessment>
+        </entry>
+      </assessmentCollection>
+    </PremiumMember>
+    <PremiumMember>
+      <name>Maggie</name>
+      <email>maggie@simpson.com</email>
+      <address>Simpson row</address>
+      <gender>f</gender>
+      <height>1.0</height>
+      <startWeight>60.0</startWeight>
+      <chosenPackage>Package 2</chosenPackage>
       <assessmentCollection/>
-    </Member>
+    </PremiumMember>
+    <StudentMember>
+      <name>Bart Simpson</name>
+      <email>bart@simpson.com</email>
+      <address>Simpson Row</address>
+      <gender>m</gender>
+      <height>1.4</height>
+      <startWeight>55.0</startWeight>
+      <chosenPackage>wit</chosenPackage>
+      <assessmentCollection/>
+      <studentId>241</studentId>
+      <collegeName>WIT</collegeName>
+    </StudentMember>
+    <PremiumMember>
+      <name>Holly</name>
+      <email>holly@simpson.com</email>
+      <address>Simpson Road</address>
+      <gender>f</gender>
+      <height>1.6</height>
+      <startWeight>66.0</startWeight>
+      <chosenPackage>Package 2</chosenPackage>
+      <assessmentCollection>
+        <entry>
+          <string>19/05/03</string>
+          <Assessment>
+            <weight>77.0</weight>
+            <thigh>40.0</thigh>
+            <waist>40.0</waist>
+            <comment> Training starts now</comment>
+            <trainer>
+              <name>Marge</name>
+              <email>marge@simpson.com</email>
+              <address>Simpson Road</address>
+              <gender>f</gender>
+              <speciality>Gymnastics</speciality>
+            </trainer>
+          </Assessment>
+        </entry>
+      </assessmentCollection>
+    </PremiumMember>
   </list>
-  <list/>
+  <list>
+    <Trainer>
+      <name>Marge</name>
+      <email>marge@simpson.com</email>
+      <address>Simpson Road</address>
+      <gender>f</gender>
+      <speciality>Gymnastics</speciality>
+    </Trainer>
+  </list>
 </object-stream>
