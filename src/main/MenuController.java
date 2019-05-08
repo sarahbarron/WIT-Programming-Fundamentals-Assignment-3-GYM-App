@@ -528,25 +528,26 @@ public class MenuController<DateMatcher> {
         System.out.println(" 1. View your Profile. ");
         System.out.println(" 2. Update your profile");
         System.out.println(" 3. Progress sub menu");
+        System.out.println(" 4. Gym Support System");
         System.out.println(" 0. Exit");
         System.out.print("=>");
 
         invalid = false;
         option = input.nextInt();
-        if (option < 0 && option > 3) {
-          System.out.println("Invalid input please enter a number between 0 and 3");
+        if (option < 0 && option > 4) {
+          System.out.println("Invalid input please enter a number between 0 and 4");
           invalid = true;
         }
       } catch (Exception e) {
         invalid = true;
-        System.err.println("ERROR: your must enter a number between 0 and 3");
+        System.err.println("ERROR: your must enter a number between 0 and 4");
       }
     } while (invalid);
     return option;
   }
 
 
-  private void runMemberMenu() {
+  public void runMemberMenu() {
     int option = memberMenu();
     while (option != 0) {
       switch (option) {
@@ -570,6 +571,11 @@ public class MenuController<DateMatcher> {
           break;
         case 3:
           runMemberProgressSubMenu();
+
+        case 4:
+          SupportSystem support = new SupportSystem();
+          support.startSupport();
+          break;
       }
 
       System.out.println("\nPress any key to continue.....................");
