@@ -30,7 +30,7 @@
 			- Calculate the BMi category
 			- Check if a member is of an ideal weight
 			- List members of an ideal weight
-			- Convert details to imperal and metric values
+			- Convert details to imperial and metric values
 			- List members in certain BMI categories. 
 
 	- API: 		I have a fully featured API with methods for the following:
@@ -68,7 +68,7 @@
 			A member can view a progress sub menu where they can
 			- View their weight progress
 			- View their waist progress
-			- View thier thigh progress
+			- View their thigh progress
 			- View all comments on their assessments
 			- View the last assessments comments
 
@@ -96,7 +96,7 @@
 			  member, t for trainer or x for exit. The user is told the input is incorrect and are prompted to enter a 
 			  valid input.      
 
-	- XML persistnece - data can be loaded from an xml file ( GymAPI - load() - line 276)
+	- XML persistence - data can be loaded from an xml file ( GymAPI - load() - line 276)
 			 or data can be saved to an xml file (GymAPI - store() - line 265) 	
 
 ------------------------------------------------------------------------------------------------------------------------------------------
@@ -111,19 +111,21 @@
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 	I implemented a member support system (SystemSupport class, InputReader class and Responder class) 
-	This allows a member to input a question. The question or sentance is split into words and each word is checked to see if it is 
-	a keyword. If it is a key word the responder sends back a corresponding response, otherwise a random default response is returned 
+	This allows a member to input a question. The question or sentence is split into words and each word is checked to see if it is 
+	a keyword. If it is a keyword the responder sends back the corresponding response, otherwise a random default response is returned 
 	to the user.
 	Keywords are: gained, bmi, ideal, assessment, profile, unmotivated, bad, 1, 2, 3, wit, packages and next. 
 
-	I used the Pattern class
+	I used the Pattern class (MainController - line 1031)
 	I used this class to check the user input date for an assessment matches the pattern yy/mm/dd.
 
-	I used the Java simpleDateFormat class 
-	I used this class to convert the string input for the assessment date to a Date. If the Date is a valid date return true 
-	otherwise return false.
+	I used the Java simpleDateFormat class (MainController - line 1034)
+	I used this class to convert the string input for the assessment date to a Date.
 
-	I used the TreeSet class
+	I use ParseException (MainController - line 1039)
+	This checks for an parse exception - if the date is not a valid date this exception will be thrown
+
+	I used the TreeSet class (Member - line 120)
 	I used this to sort the assessment dates in date order.
 	
 
@@ -141,6 +143,6 @@
 	Assessment date
 	https://www.baeldung.com/java-date-regular-expressions
 
-	I looked at the following article/code which helped me with using the SimpleDateFormat class, for converting a string to a Date,
-	which checks if it is a valid date.
+	I looked at the following article/code which helped me with using the SimpleDateFormat class and ParseException, 
+	for converting a string to a Date and checking if the date is a valid date.
 	http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate.htm
