@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-/* This class operates between the model classes and the menu driver class it stores an array list
-for members and an array list for trainers */
+/*
+This class operates between the model classes and the menu driver class it stores an array list
+for members and an array list for trainers
+*/
 public class GymAPI {
   // Array list of members
   private ArrayList<Member> members;
@@ -68,7 +70,7 @@ public class GymAPI {
     return false;
   }
 
-  //    Returns the member object that matches the email entered. If no member matches null is returned
+  // Returns the member object that matches the email entered. If no member matches null is returned
   public Member searchMembersByEmail(String emailEntered) {
     members = getMembers();
     for (Member member : members) {
@@ -79,16 +81,17 @@ public class GymAPI {
     return null;
   }
 
-  /*  Returns a list of member names that partially or entirely matches the entered name. An empty array is returned
-      when there are no matches
-   */
+  /*
+  Returns a list of member names that partially or entirely matches the entered name. An empty array is returned
+  when there are no matches
+  */
   public ArrayList<String> searchMembersByName(String nameEntered) {
     members = getMembers();
     ArrayList<String> matchedlist = new ArrayList<>();
 
     for (Member member : members) {
       String memberName = member.getName();
-//    Convert to lowercase as the .contains and .equals methods are case sensitive
+      //Convert to lowercase as the .contains and .equals methods are case sensitive
       memberName = memberName.toLowerCase();
       nameEntered = nameEntered.toLowerCase();
       // check for an exact match of the name being search in the list of members
@@ -103,7 +106,7 @@ public class GymAPI {
     return matchedlist;
   }
 
-  //    Returns the trainer object that matches the email entered. If no trainer matches, return null
+  // Returns the trainer object that matches the email entered. If no trainer matches, return null
   public Trainer searchTrainersByEmail(String emailEntered) {
     trainers = getTrainers();
     for (Trainer trainer : trainers) {
@@ -114,22 +117,23 @@ public class GymAPI {
     return null;
   }
 
-  /*  Returns a list of trainers names that partially or entirely matches the entered name. An empty array is returned
-    when there are no matches
+  /*
+  Returns a list of trainers names that partially or entirely matches the entered name. An empty array is returned
+  when there are no matches
  */
   public ArrayList<String> searchTrainersByName(String nameEntered) {
     trainers = getTrainers();
     ArrayList<String> matchedlist = new ArrayList<>();
 
     for (Trainer trainer : trainers) {
-//      convert to lower case names as the .contains and .equals method is case sensitive
+      // Convert to lower case names as the .contains and .equals method is case sensitive
       String trainerName = trainer.getName().toLowerCase();
       nameEntered = nameEntered.toLowerCase();
-      // check for an exact match of the name being search in the list of members
+      // Check for an exact match of the name being search in the list of members
       if (trainerName.equals(nameEntered)) {
         matchedlist.add(trainerName);
       }
-      // otherwise check if there is a partial match
+      // Otherwise check if there is a partial match
       else if (trainerName.contains(nameEntered)) {
         matchedlist.add(trainerName);
       }
@@ -137,14 +141,15 @@ public class GymAPI {
     return matchedlist;
   }
 
-  //    Returns a list containing all the members in the gym. returns an empty list if none found
+  // A method to returns a list containing all the members in the gym. returns an empty list if none found
   public ArrayList<Member> listMembers() {
     return members;
   }
 
-  /* Returns a list containing all the members details in the gym whose latest assessment weight is an ideal
+  /*
+  A method to return a list containing all the members details in the gym whose latest assessment weight is an ideal
   weight (based on the Devine Formula). Returns an empty list if none are found.
-   */
+  */
   public ArrayList<Member> listMembersWithIdealWeight() {
 
     ArrayList<Member> listOfMembersWithIdealWeight = new ArrayList<>();
@@ -159,8 +164,10 @@ public class GymAPI {
     return listOfMembersWithIdealWeight;
   }
 
-  /* Returns a list of all members details in the gym whose BMI category (based on the latest assessment weight) partially
-  or entirely matches the entered category. Returns an empty list if none found */
+  /*
+  Returns a list of all members details in the gym whose BMI category (based on the latest assessment weight) partially
+  or entirely matches the entered category. Returns an empty list if none found
+  */
   public ArrayList<Member> listMembersBySpecificBMICategory(String category) {
 
     ArrayList<Member> listOfMembersInSpecifiedBMICategory = new ArrayList<>();
@@ -175,11 +182,12 @@ public class GymAPI {
     String moderatelyObese = "MODERATELY OBESE";
     String severlyObese = "SEVERELY OBESE";
 
-    /*    If the inputted string is an exact match to one of the BMI categories iterate through the list of members.
+    /*
+    If the inputted string is an exact match to one of the BMI categories iterate through the list of members.
     get each members latest assessment, calculate their BMi and with their BMI rate calculate the BMI category they are
     in. If the member is in the category inputted by user add the member to an array. Return this array after all
     members categories have been calculated.
-  */
+   */
     if (category.equals(severelyUnderWeight) || category.equals(underweight) || category.equals(normal)
         || category.equals(overweight) || category.equals(moderatelyObese) || category.equals(severlyObese)) {
       for (Member member : members) {
@@ -191,7 +199,9 @@ public class GymAPI {
         }
       }
     }
-    /* otherwise if the inputted string only partially matches a bmi category, get each members assessment, calculate
+
+    /*
+    Otherwise if the inputted string only partially matches a bmi category, get each members assessment, calculate
     their bmi using the latest weight. Calculate the bmi category using the bmi rate. If the members category partially
     matches the input from the user add the member to an array
     */
@@ -206,18 +216,20 @@ public class GymAPI {
         }
       }
     }
-//    Otherwise print as statement to say there is no such category
+    // Otherwise print as statement to say there is no such category
     else {
       System.out.println("no such category");
     }
 
-//    Return the array list of all members who matched the inputted category from the user.
+    // Return the array list of all members who matched the inputted category from the user.
     return listOfMembersInSpecifiedBMICategory;
   }
 
-  /*    List for each member, their latest Assessment weight and their height both imperially and metrically.
-    format Joe Soap: xx kg (xxx lbs) x.x metres(xx inches)
-    If there are no members in the gym return a message "No registered members"  */
+  /*
+  List for each member, their latest Assessment weight and their height both imperially and metrically.
+  format Joe Soap: xx kg (xxx lbs) x.x metres(xx inches)
+  If there are no members in the gym return a message "No registered members"
+  */
   public String listMemberDetailsImperialAndMetric() {
     if (members.size() > 0) {
       String memberName = "";
@@ -244,7 +256,7 @@ public class GymAPI {
     }
   }
 
-  // returns a float with 2 decimal places
+  // Returns a float with 2 decimal places
   private double toOneDecimalPlaces(double num) {
     return (int) (num * 10) / 10.0;
   }
@@ -259,13 +271,14 @@ public class GymAPI {
 
   }
 
-  //    Pull the members and trainers Array lists from the associated XML file
+  // Pull the members, trainers and assessments from the associated XML file
   @SuppressWarnings("unchecked")
   public void load() throws Exception {
     XStream xstream = new XStream(new DomDriver());
 
     // ------------------ PREVENT SECURITY WARNINGS---------------------------
-    Class<?>[] classes = new Class[]{Member.class, StudentMember.class, PremiumMember.class, Trainer.class, Assessment.class};
+    Class<?>[] classes = new Class[]
+        {Member.class, StudentMember.class, PremiumMember.class, Trainer.class, Assessment.class};
     XStream.setupDefaultSecurity(xstream);
     xstream.allowTypes(classes);
     // -----------------------------------------------------------------------

@@ -1,17 +1,14 @@
-
-// THIS CODE IS INCOMPLETE
-//given
+/*
+Person class - is the super class for a member, student member, premium member and trainer.
+It stores a name, email address, address and gender.
+*/
 public class Person {
-    //given
     private String name;
-    //given
     private String email;
-    //given
     private String address;
-    //given
     private String gender;
 
-    //given
+    // Set the persons name with a max length of 30 characters
     public void setName(String name) {
 
         if(name.length()>30)
@@ -23,12 +20,12 @@ public class Person {
         }
     }
 
-    //given
+    // Set the persons address
     public void setAddress(String address) {
         this.address = address;
     }
 
-    //given
+    // Set the persons gender to m for male, f for female or unspecified if neither
     public void setGender(String gender) {
         if(gender.equalsIgnoreCase("M") || gender.equalsIgnoreCase("F"))
         {
@@ -39,38 +36,35 @@ public class Person {
         }
     }
 
-    //given
+    // Get the persons name
     public String getName() {
         return name;
     }
 
-    //given
+    // Get the persons email address
     public String getEmail() {
         return email;
     }
 
-    //given
+    // Get the persons address
     public String getAddress() {
         return address;
     }
 
-    //given
+    // Get the persons gender
     public String getGender() {
         return gender;
     }
 
-    //given
+    // Constructor method for a person with email address, name, address and gender
     public Person(String email, String name, String address, String gender) {
-        //given
         setName(name);
-        //given
         this.email = email;
-        //given
         this.address = address;
-        //given
         setGender(gender);
     }
 
+    // empty constructor method
     public Person(){
 
     }

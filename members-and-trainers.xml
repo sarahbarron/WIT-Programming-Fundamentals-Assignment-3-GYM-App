@@ -1,21 +1,37 @@
 <object-stream>
   <list>
     <StudentMember>
-      <name>Lisa</name>
+      <name>Lisa Simpson</name>
       <email>lisa@simpson.com</email>
-      <address>simpson row</address>
+      <address>Simpson Row</address>
       <gender>f</gender>
       <height>1.4</height>
       <startWeight>88.0</startWeight>
       <chosenPackage>wit</chosenPackage>
       <assessmentCollection>
         <entry>
+          <string>19/12/02</string>
+          <Assessment>
+            <weight>35.0</weight>
+            <thigh>35.0</thigh>
+            <waist>43.0</waist>
+            <comment>good</comment>
+            <trainer>
+              <name>Marge</name>
+              <email>marge@simpson.com</email>
+              <address>Simpson Road</address>
+              <gender>f</gender>
+              <speciality>Gymnastics</speciality>
+            </trainer>
+          </Assessment>
+        </entry>
+        <entry>
           <string>19/05/19</string>
           <Assessment>
             <weight>88.0</weight>
             <thigh>23.0</thigh>
             <waist>23.0</waist>
-            <comment>Keep it up</comment>
+            <comment>Keep up the great work</comment>
             <trainer>
               <name>Marge</name>
               <email>marge@simpson.com</email>
@@ -45,7 +61,7 @@
             <thigh>44.0</thigh>
             <waist>33.0</waist>
             <comment>Great</comment>
-            <trainer reference="../../../../../StudentMember/assessmentCollection/entry/Assessment/trainer"/>
+            <trainer reference="../../../../../StudentMember/assessmentCollection/entry[2]/Assessment/trainer"/>
           </Assessment>
         </entry>
         <entry>
@@ -55,7 +71,7 @@
             <thigh>22.0</thigh>
             <waist>22.0</waist>
             <comment>ok</comment>
-            <trainer reference="../../../../../StudentMember/assessmentCollection/entry/Assessment/trainer"/>
+            <trainer reference="../../../../../StudentMember/assessmentCollection/entry[2]/Assessment/trainer"/>
           </Assessment>
         </entry>
       </assessmentCollection>
@@ -97,7 +113,7 @@
             <weight>77.0</weight>
             <thigh>40.0</thigh>
             <waist>40.0</waist>
-            <comment> Training starts now</comment>
+            <comment>Great Training this week</comment>
             <trainer>
               <name>Marge</name>
               <email>marge@simpson.com</email>
@@ -109,6 +125,77 @@
         </entry>
       </assessmentCollection>
     </PremiumMember>
+    <StudentMember>
+      <name>Julie</name>
+      <email>julie@simpson.com</email>
+      <address>Simpson Green</address>
+      <gender>f</gender>
+      <height>1.0</height>
+      <startWeight>35.0</startWeight>
+      <chosenPackage>wit</chosenPackage>
+      <assessmentCollection/>
+      <studentId>0</studentId>
+      <collegeName>WIT</collegeName>
+    </StudentMember>
+    <StudentMember>
+      <name>bernie</name>
+      <email>bernie@simpson.com</email>
+      <address>simpson drive</address>
+      <gender>f</gender>
+      <height>3.0</height>
+      <startWeight>90.0</startWeight>
+      <chosenPackage>wit</chosenPackage>
+      <assessmentCollection/>
+      <studentId>0</studentId>
+      <collegeName>WIT</collegeName>
+    </StudentMember>
+    <PremiumMember>
+      <name>John</name>
+      <email>john@simpson.com</email>
+      <address>Simpson avenue</address>
+      <gender>m</gender>
+      <height>1.6</height>
+      <startWeight>88.0</startWeight>
+      <chosenPackage>Package 1</chosenPackage>
+      <assessmentCollection/>
+    </PremiumMember>
+    <PremiumMember>
+      <name>donal</name>
+      <email>donal@simpson.com</email>
+      <address>simpson road</address>
+      <gender>m</gender>
+      <height>2.0</height>
+      <startWeight>66.0</startWeight>
+      <chosenPackage>Package 2</chosenPackage>
+      <assessmentCollection>
+        <entry>
+          <string>19/04/03</string>
+          <Assessment>
+            <weight>88.0</weight>
+            <thigh>22.0</thigh>
+            <waist>23.0</waist>
+            <comment>We will need to do alot of work</comment>
+            <trainer>
+              <name>Marge</name>
+              <email>marge@simpson.com</email>
+              <address>Simpson Road</address>
+              <gender>f</gender>
+              <speciality>Gymnastics</speciality>
+            </trainer>
+          </Assessment>
+        </entry>
+      </assessmentCollection>
+    </PremiumMember>
+    <PremiumMember>
+      <name>Ger</name>
+      <email>ger@simpson.com</email>
+      <address>Simpson mile</address>
+      <gender>m</gender>
+      <height>2.0</height>
+      <startWeight>99.0</startWeight>
+      <chosenPackage>Package 1</chosenPackage>
+      <assessmentCollection/>
+    </PremiumMember>
   </list>
   <list>
     <Trainer>
@@ -117,6 +204,13 @@
       <address>Simpson Road</address>
       <gender>f</gender>
       <speciality>Gymnastics</speciality>
+    </Trainer>
+    <Trainer>
+      <name>Joe</name>
+      <email>trainer@simpson.com</email>
+      <address>Simpson Row</address>
+      <gender>m</gender>
+      <speciality>weights</speciality>
     </Trainer>
   </list>
 </object-stream>

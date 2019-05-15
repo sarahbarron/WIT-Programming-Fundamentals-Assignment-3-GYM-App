@@ -6,7 +6,7 @@ import java.util.TreeSet;
 /*
 An abstract Member class that extends the Person class
 Stores a member. Each member has a height, starting weight, a gym package and assessments
- */
+*/
 public abstract class Member extends Person {
 
   private float height;
@@ -14,9 +14,8 @@ public abstract class Member extends Person {
   private String chosenPackage;
   private HashMap<String, Assessment> assessmentCollection;
 
-  //    constructor method
+  // Member empty constructor method
   public Member() {
-
   }
 
   // Constructor method with email name, address, gender, height (metres), start weight (kgs) and chosen package
@@ -27,16 +26,16 @@ public abstract class Member extends Person {
     setHeight(height);
     setStartWeight(startWeight);
     setChosenPackage(chosenPackage);
-//        create a Collection to store Members Assessments
+    // Create a Collection to store Members Assessments
     assessmentCollection = new HashMap<String, Assessment>();
   }
 
-  //    Get the height of the member
+  // Get the height of the member
   public float getHeight() {
     return height;
   }
 
-  // set the height of the member, if they enter between 1 and 3 store the input otherwise set the height to 0
+  // Set the height of the member, if they enter between 1 and 3 store the input otherwise set the height to 0
   public void setHeight(float height) {
     if (height >= 1 && height <= 3.0) {
       this.height = height;
@@ -45,14 +44,15 @@ public abstract class Member extends Person {
     }
   }
 
-  // get the members starting weight
+  // Get the members starting weight
   public float getStartWeight() {
     return startWeight;
   }
 
-  /* set the members starting weight, if the user input was between 35 and 250 store the user input otherwise
+  /*
+  Set the members starting weight, if the user input was between 35 and 250 store the user input otherwise
   store 0 as the starting weight
-*/
+  */
   public void setStartWeight(float startWeight) {
     if (startWeight >= 35 && startWeight <= 250) {
       this.startWeight = startWeight;
@@ -72,15 +72,18 @@ public abstract class Member extends Person {
     this.chosenPackage = chosenPackage;
   }
 
-  /*   add an assessment to the members collection of assessments, with
+  /*
+  Add an assessment to the members collection of assessments, with
   the date as the key and the assessment as the value
-    */
+  */
   public void addAssessment(String date, Assessment assessment) {
     assessmentCollection.put(date, assessment);
   }
 
-  /*    get the latest assessment by getting a sorted set of assessment dates,
-  use the last date in the set as the key to finding the latest assessment and return the assessment*/
+  /*
+  Get the latest assessment by getting a sorted set of assessment dates,
+  use the last date in the set as the key to finding the latest assessment and return the assessment
+  */
   public Assessment latestAssessment() {
 
     SortedSet sortedSet = sortedAssessmentDates();
@@ -94,9 +97,10 @@ public abstract class Member extends Person {
     return lastAssessment;
   }
 
-  /*   Return the first assessment by getting a sorted set of assessment dates. Use the first date in the set as the key
-      to finding the first assessment. return this first assessment
-    */
+  /*
+  Return the first assessment by getting a sorted set of assessment dates. Use the first date in the set as the key
+  to finding the first assessment. return this first assessment
+  */
   public Assessment firstAssessment() {
     SortedSet sortedSet = sortedAssessmentDates();
     Assessment firstAssessment = new Assessment(startWeight, -1, -1, "");
@@ -111,7 +115,7 @@ public abstract class Member extends Person {
   A method to sort assessment dates, by creating a SortedSet and assigning a TreeSet to it,
   add all keys (dates) from the HashMap assessmentCollection to the SortedSet
   this will sort them automatically, return the SortedSet
-   */
+  */
   public SortedSet sortedAssessmentDates() {
     SortedSet<String> sortedSet = new TreeSet();
     sortedSet.addAll(assessmentCollection.keySet());
@@ -123,7 +127,7 @@ public abstract class Member extends Person {
     return assessmentCollection;
   }
 
-  //    abstract method for chosen Package
+  // Abstract method for chosen Package
   public abstract void chosenPackage(String chosenPackage);
 
   // toString method for Member class

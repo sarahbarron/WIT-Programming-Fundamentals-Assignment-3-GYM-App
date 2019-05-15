@@ -20,7 +20,7 @@ public class GymAPITest {
   Trainer trainer2;
   Trainer trainer3;
 
-  //    Due to the Member class being abstract we need to use a mock member.
+  //    Due to the Member class being abstract a mockMember class is needed to test members.
   private class MockMember extends Member {
 
     public MockMember() {
@@ -28,14 +28,10 @@ public class GymAPITest {
 
     public MockMember(String email, String name, String address,
                       String gender, float height, float startWeight, String chosenPackage) {
-
       super(email, name, address, gender, height, startWeight, chosenPackage);
       HashMap<String, Assessment> assessmentCollection = new HashMap<String, Assessment>();
-
     }
-
     public void chosenPackage(String chosenPackage) {
-
     }
   }
 
