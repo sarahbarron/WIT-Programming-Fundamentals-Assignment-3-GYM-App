@@ -87,7 +87,7 @@ public abstract class Member extends Person {
   public Assessment latestAssessment() {
 
     SortedSet sortedSet = sortedAssessmentDates();
-    Assessment lastAssessment = new Assessment(startWeight, -1, -1, "");
+    Assessment lastAssessment = null;
     if (sortedSet.size() > 0) {
       String lastDate = (String) sortedSet.last();
       lastAssessment = assessmentCollection.get(lastDate);
@@ -103,7 +103,7 @@ public abstract class Member extends Person {
   */
   public Assessment firstAssessment() {
     SortedSet sortedSet = sortedAssessmentDates();
-    Assessment firstAssessment = new Assessment(startWeight, -1, -1, "");
+    Assessment firstAssessment = null;
     if (sortedSet.size() > 0) {
       String firstDate = (String) sortedSet.first();
       firstAssessment = assessmentCollection.get(firstDate);

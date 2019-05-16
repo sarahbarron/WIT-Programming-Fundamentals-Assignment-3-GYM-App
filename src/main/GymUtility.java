@@ -78,7 +78,7 @@ public class GymUtility {
         idealWeight = 45.5 + weightForEachInchOverFiveFoot;
       }
       // If the members weight is 2kg either side of the ideal weight return true otherwise return false
-      if (weight >= idealWeight - 2 && weight <= idealWeight + 2) {
+      if (weight >= idealWeight - .2 && weight <= idealWeight + .2) {
         return true;
       } else {
         return false;

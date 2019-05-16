@@ -600,8 +600,10 @@ public class MenuController{
           if (listOfMembersWithIdealWeight.size() <= 0) {
             System.out.println("There are no members with an ideal body weight");
           } else {
-            for (int i = 0; i > listOfMembersWithIdealWeight.size(); i++) {
-              System.out.println("-------------------------------------------------------------------------------------");
+            System.out.println(listOfMembersWithIdealWeight.size());
+            for (int i = 0; i < listOfMembersWithIdealWeight.size(); i++) {
+              System.out.println("-------------------------------------------------------------------------------------" +
+                  "-------------------------------------------------------------------------------------");
               System.out.println(listOfMembersWithIdealWeight.get(i));
 
             }
@@ -616,6 +618,7 @@ public class MenuController{
           String bmiCategory = input.nextLine();
           ArrayList<Member> listOfMembersInBmiCategory = gymApi.listMembersBySpecificBMICategory(bmiCategory);
           int numberOfMemberInBmiCategory = listOfMembersInBmiCategory.size();
+
           if (numberOfMemberInBmiCategory <= 0) {
             System.out.println("There is no members in that category");
           } else {
@@ -1210,14 +1213,20 @@ public class MenuController{
   private void getWeightProgress() {
     float startWeight = loggedInMember.getStartWeight();
     Assessment latestAssessment = loggedInMember.latestAssessment();
-    float latestWeight = latestAssessment.getWeight();
-    float weightProgress = startWeight - latestWeight;
-    System.out.println("Your starting weight was: " + startWeight);
-    System.out.println("Your latest weight is: " + latestWeight);
-    if (weightProgress < 0) {
-      System.out.println("You have gained: " + (weightProgress * -1) + " kg");
-    } else {
-      System.out.println("You have lost: " + weightProgress + " kg");
+    if(latestAssessment == null)
+    {
+      System.out.println("You have no assessments to base progress against. \nCurrent weight: "+startWeight+" kg");
+    }
+    else {
+      float latestWeight = latestAssessment.getWeight();
+      float weightProgress = startWeight - latestWeight;
+      System.out.println("Your starting weight was: " + startWeight);
+      System.out.println("Your latest weight is: " + latestWeight);
+      if (weightProgress < 0) {
+        System.out.println("You have gained: " + (weightProgress * -1) + " kg");
+      } else {
+        System.out.println("You have lost: " + weightProgress + " kg");
+      }
     }
   }
 
@@ -1229,12 +1238,14 @@ public class MenuController{
   private void getWaistProgress() {
     Assessment firstAssessment = loggedInMember.firstAssessment();
     Assessment latestAssessment = loggedInMember.latestAssessment();
-    if (firstAssessment == latestAssessment) {
+    if(firstAssessment == null)
+    {
+      System.out.println("You have no assessments to base progress against.");
+    }
+    else if (firstAssessment == latestAssessment) {
       System.out.println("There is only one assessment so there will be no progress yet");
     }
-    if (firstAssessment.getWaist() == -1) {
-      System.out.println("You have not entered any assessments yet");
-    } else {
+    else {
       float firstWaist = firstAssessment.getWaist();
       float latestWaist = latestAssessment.getWaist();
       float waistProgress = firstWaist - latestWaist;
@@ -1256,12 +1267,15 @@ public class MenuController{
   private void getThighProgress() {
     Assessment firstAssessment = loggedInMember.firstAssessment();
     Assessment latestAssessment = loggedInMember.latestAssessment();
-    if (firstAssessment == latestAssessment) {
+
+    if(firstAssessment == null)
+    {
+      System.out.println("You have no assessments to base progress against.");
+    }
+    else if (firstAssessment == latestAssessment) {
       System.out.println("There is only one assessment so there will be no progress yet");
     }
-    if (firstAssessment.getWaist() == -1) {
-      System.out.println("You have not entered any assessments yet");
-    } else {
+    else {
       float firstThigh = firstAssessment.getThigh();
       float latestThigh = latestAssessment.getThigh();
       float waistProgress = firstThigh - latestThigh;
@@ -1295,7 +1309,7 @@ public class MenuController{
         System.out.println("Date: " + date + " , Comment: " + comment);
       }
     } else {
-      System.out.println("You have not entered any assessments yet");
+      System.out.println("You have no assessments yet");
     }
   }
 

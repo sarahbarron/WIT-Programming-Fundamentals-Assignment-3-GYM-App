@@ -192,6 +192,10 @@ public class GymAPI {
         || category.equals(overweight) || category.equals(moderatelyObese) || category.equals(severlyObese)) {
       for (Member member : members) {
         latestAssessment = member.latestAssessment();
+        if(latestAssessment==null)
+        {
+          latestAssessment = new Assessment(member.getStartWeight(),0,0,"");
+        }
         bmi = (float) GymUtility.calculateBMI(member, latestAssessment);
         memberBmiCategory = GymUtility.determineBMICategory(bmi);
         if (memberBmiCategory.equals(category)) {
@@ -208,7 +212,12 @@ public class GymAPI {
     else if (severelyUnderWeight.contains(category) || underweight.contains(category) || normal.contains(category)
         || overweight.contains(category) || moderatelyObese.contains("category") || severlyObese.contains(category)) {
       for (Member member : members) {
+
         latestAssessment = member.latestAssessment();
+        if(latestAssessment==null)
+        {
+          latestAssessment = new Assessment(member.getStartWeight(),0,0,"");
+        }
         bmi = (float) GymUtility.calculateBMI(member, latestAssessment);
         memberBmiCategory = GymUtility.determineBMICategory(bmi);
         if (memberBmiCategory.contains(category)) {
@@ -237,18 +246,27 @@ public class GymAPI {
       int weightLbs = 0;
       double heightMetres = 0;
       int heightInches = 0;
-      String membersDetails = "Member Details Imperial and Metric: \n";
+      String membersDetails ="";
       Assessment latestAssessment;
       for (Member member : members) {
         memberName = member.getName();
         latestAssessment = member.latestAssessment();
-        weightKg = (int) Math.round(latestAssessment.getWeight());
+        if(latestAssessment !=null) {
+          weightKg = (int) Math.round(latestAssessment.getWeight());
+          heightMetres = (double) member.getHeight();
+        }
+        else
+        {
+          weightKg = (int) Math.round(member.getStartWeight());
+          heightMetres = (double) member.getHeight();
+        }
         weightLbs = (int) (weightKg * 2.2);
-        heightMetres = (double) member.getHeight();
         heightInches = (int) Math.round((heightMetres * 39.37));
         heightMetres = toOneDecimalPlaces(heightMetres);
-        membersDetails = membersDetails + memberName + ": " + weightKg
-            + " kg (" + weightLbs + " lbs) " + heightMetres + " metres (" + heightInches + " inches) \n";
+
+          membersDetails = membersDetails + memberName + ": " + weightKg
+              + " kg (" + weightLbs + " lbs) " + heightMetres + " metres (" + heightInches + " inches) \n";
+
       }
       return membersDetails;
     } else {

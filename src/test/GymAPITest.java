@@ -613,7 +613,6 @@ public class GymAPITest {
             && members[0].contains("283 lbs")
             && members[0].contains("2.1 metres")
             && members[0].contains("84 inches"));
-
       }
     }
 
