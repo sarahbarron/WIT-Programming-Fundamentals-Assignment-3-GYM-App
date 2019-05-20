@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /*
 This class is the main menu controller for the gym application
 */
-public class MenuController{
+public class MenuController {
 
   private Scanner input = new Scanner(System.in);
   private GymAPI gymApi = new GymAPI();
@@ -582,14 +582,12 @@ public class MenuController{
           System.out.println("Input the members name:");
           String name = input.nextLine();
           ArrayList<String> memberByNames = gymApi.searchMembersByName(name);
-          if(memberByNames.size()>0) {
+          if (memberByNames.size() > 0) {
             for (int i = 0; i < memberByNames.size(); i++) {
               String memberByName = memberByNames.get(i);
               System.out.println(memberByName);
             }
-          }
-          else
-          {
+          } else {
             System.out.println("There are no members with this name");
           }
           break;
@@ -729,14 +727,12 @@ public class MenuController{
           System.out.println("Input the trainers name:");
           String name = input.nextLine();
           ArrayList<String> trainersByName = gymApi.searchTrainersByName(name);
-          if(trainersByName.size()>0) {
+          if (trainersByName.size() > 0) {
             for (int i = 0; i < trainersByName.size(); i++) {
               String trainerByName = trainersByName.get(i);
               System.out.println(trainerByName);
             }
-          }
-          else
-          {
+          } else {
             System.out.println("There are no trainers with this name");
           }
           break;
@@ -1213,11 +1209,9 @@ public class MenuController{
   private void getWeightProgress() {
     float startWeight = loggedInMember.getStartWeight();
     Assessment latestAssessment = loggedInMember.latestAssessment();
-    if(latestAssessment == null)
-    {
-      System.out.println("You have no assessments to base progress against. \nCurrent weight: "+startWeight+" kg");
-    }
-    else {
+    if (latestAssessment == null) {
+      System.out.println("You have no assessments to base progress against. \nCurrent weight: " + startWeight + " kg");
+    } else {
       float latestWeight = latestAssessment.getWeight();
       float weightProgress = startWeight - latestWeight;
       System.out.println("Your starting weight was: " + startWeight);
@@ -1238,14 +1232,11 @@ public class MenuController{
   private void getWaistProgress() {
     Assessment firstAssessment = loggedInMember.firstAssessment();
     Assessment latestAssessment = loggedInMember.latestAssessment();
-    if(firstAssessment == null)
-    {
+    if (firstAssessment == null) {
       System.out.println("You have no assessments to base progress against.");
-    }
-    else if (firstAssessment == latestAssessment) {
+    } else if (firstAssessment == latestAssessment) {
       System.out.println("There is only one assessment so there will be no progress yet");
-    }
-    else {
+    } else {
       float firstWaist = firstAssessment.getWaist();
       float latestWaist = latestAssessment.getWaist();
       float waistProgress = firstWaist - latestWaist;
@@ -1268,14 +1259,11 @@ public class MenuController{
     Assessment firstAssessment = loggedInMember.firstAssessment();
     Assessment latestAssessment = loggedInMember.latestAssessment();
 
-    if(firstAssessment == null)
-    {
+    if (firstAssessment == null) {
       System.out.println("You have no assessments to base progress against.");
-    }
-    else if (firstAssessment == latestAssessment) {
+    } else if (firstAssessment == latestAssessment) {
       System.out.println("There is only one assessment so there will be no progress yet");
-    }
-    else {
+    } else {
       float firstThigh = firstAssessment.getThigh();
       float latestThigh = latestAssessment.getThigh();
       float waistProgress = firstThigh - latestThigh;

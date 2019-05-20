@@ -2,7 +2,7 @@
 Trainer class extends the Person class.
 It stores the details of a trainer, their email address, name, address, gender, and trainer speciality.
  */
-public class Trainer extends Person  {
+public class Trainer extends Person {
 
   private String speciality;
 
@@ -25,6 +25,6 @@ public class Trainer extends Person  {
   // toString method for Trainer class
   public String toString() {
 
-    return super.toString()+" Speciality: "+speciality;
+    return super.toString() + " Speciality: " + speciality;
   }
 }

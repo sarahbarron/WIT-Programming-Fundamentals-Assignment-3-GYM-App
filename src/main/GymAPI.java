@@ -153,12 +153,15 @@ public class GymAPI {
   public ArrayList<Member> listMembersWithIdealWeight() {
 
     ArrayList<Member> listOfMembersWithIdealWeight = new ArrayList<>();
+
     for (Member member : members) {
+
+      Assessment latestAssessment = new Assessment(member.getStartWeight(), 0, 0, "");
       if (member.getAssessments().size() > 0) {
-        Assessment latestAssessment = member.latestAssessment();
-        if (GymUtility.isIdealBodyWeight(member, latestAssessment)) {
-          listOfMembersWithIdealWeight.add(member);
-        }
+        latestAssessment = member.latestAssessment();
+      }
+      if (GymUtility.isIdealBodyWeight(member, latestAssessment)) {
+        listOfMembersWithIdealWeight.add(member);
       }
     }
     return listOfMembersWithIdealWeight;
@@ -192,9 +195,8 @@ public class GymAPI {
         || category.equals(overweight) || category.equals(moderatelyObese) || category.equals(severlyObese)) {
       for (Member member : members) {
         latestAssessment = member.latestAssessment();
-        if(latestAssessment==null)
-        {
-          latestAssessment = new Assessment(member.getStartWeight(),0,0,"");
+        if (latestAssessment == null) {
+          latestAssessment = new Assessment(member.getStartWeight(), 0, 0, "");
         }
         bmi = (float) GymUtility.calculateBMI(member, latestAssessment);
         memberBmiCategory = GymUtility.determineBMICategory(bmi);
@@ -214,9 +216,8 @@ public class GymAPI {
       for (Member member : members) {
 
         latestAssessment = member.latestAssessment();
-        if(latestAssessment==null)
-        {
-          latestAssessment = new Assessment(member.getStartWeight(),0,0,"");
+        if (latestAssessment == null) {
+          latestAssessment = new Assessment(member.getStartWeight(), 0, 0, "");
         }
         bmi = (float) GymUtility.calculateBMI(member, latestAssessment);
         memberBmiCategory = GymUtility.determineBMICategory(bmi);
@@ -246,17 +247,15 @@ public class GymAPI {
       int weightLbs = 0;
       double heightMetres = 0;
       int heightInches = 0;
-      String membersDetails ="";
+      String membersDetails = "";
       Assessment latestAssessment;
       for (Member member : members) {
         memberName = member.getName();
         latestAssessment = member.latestAssessment();
-        if(latestAssessment !=null) {
+        if (latestAssessment != null) {
           weightKg = (int) Math.round(latestAssessment.getWeight());
           heightMetres = (double) member.getHeight();
-        }
-        else
-        {
+        } else {
           weightKg = (int) Math.round(member.getStartWeight());
           heightMetres = (double) member.getHeight();
         }
@@ -264,8 +263,8 @@ public class GymAPI {
         heightInches = (int) Math.round((heightMetres * 39.37));
         heightMetres = toOneDecimalPlaces(heightMetres);
 
-          membersDetails = membersDetails + memberName + ": " + weightKg
-              + " kg (" + weightLbs + " lbs) " + heightMetres + " metres (" + heightInches + " inches) \n";
+        membersDetails = membersDetails + memberName + ": " + weightKg
+            + " kg (" + weightLbs + " lbs) " + heightMetres + " metres (" + heightInches + " inches) \n";
 
       }
       return membersDetails;

@@ -2,7 +2,7 @@
 StudentMember is a member that is a student.
 A student member has a student id and a college name stored with the members details
  */
-public class StudentMember extends Member  {
+public class StudentMember extends Member {
 
   private int studentId;
   private String collegeName;
@@ -21,7 +21,7 @@ public class StudentMember extends Member  {
   }
 
   // Set the student Id
-  public void setStudentId(int studentId){
+  public void setStudentId(int studentId) {
     this.studentId = studentId;
   }
 
@@ -31,21 +31,17 @@ public class StudentMember extends Member  {
   }
 
   // set the College name
-  public void setCollegeName(String collegeName){
+  public void setCollegeName(String collegeName) {
     this.collegeName = collegeName;
   }
 
   // Implementation of the abstract method chosenPackage in the Member class to set the chosen package
   @Override
-  public void chosenPackage(String packageChoice)
-  {
+  public void chosenPackage(String packageChoice) {
     String collegeName = getCollegeName();
-    if(collegeName.equals(packageChoice))
-    {
+    if (collegeName.equals(packageChoice)) {
       super.setChosenPackage(packageChoice);
-    }
-    else
-    {
+    } else {
       super.setChosenPackage("Package 3");
     }
   }
@@ -53,6 +49,6 @@ public class StudentMember extends Member  {
   // toString method for Student Member class
   public String toString() {
 
-    return super.toString()+", College Name: "+collegeName+" ,Student Id: "+studentId;
+    return super.toString() + ", College Name: " + collegeName + " ,Student Id: " + studentId;
   }
 }
