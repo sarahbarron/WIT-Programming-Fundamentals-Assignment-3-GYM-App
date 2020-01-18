@@ -1,7 +1,10 @@
 ﻿	
-	Gym Application
 	Name : Sarah Barron
-	Student Number : 20013679
+	College: Waterford Institute of Technology
+	Course: HDip in Computer Science
+	Module: Programming
+	Assignment 3: Gym Application
+	Result: 100%
 
 ------------------------------------------------------------------------------------------------------------------------
 	Which level unit tests succeed completely:
