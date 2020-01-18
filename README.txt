@@ -4,7 +4,7 @@
 	Course: HDip in Computer Science
 	Module: Programming
 	Assignment 3: Gym Application
-	Result: 100%
+	Result: 98%
 
 ------------------------------------------------------------------------------------------------------------------------
 	Which level unit tests succeed completely:
