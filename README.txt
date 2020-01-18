@@ -168,4 +168,4 @@
 
 	I looked at the following article/code which helped me with using the SimpleDateFormat class and ParseException, 
 	for converting a string to a Date and checking if the date is a valid date.
-	http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate.htm
+	http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate.html
